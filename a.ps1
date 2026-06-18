@@ -40,7 +40,8 @@ try {
 
     $ahkTempDir = Join-Path $tempDir "ahk"
     New-Item -Path $ahkTempDir -ItemType Directory -Force | Out-Null
-    $args = "/silent", "/to=`"$ahkTempDir`""
+    $quotedTarget = '"' + $ahkTempDir + '"'
+    $args = "/silent", "/to=$quotedTarget"
     Start-Process -FilePath $ahkInstaller -ArgumentList $args -Wait
 
 
