@@ -41,7 +41,7 @@ try {
     $ahkTempDir = Join-Path $tempDir "ahk"
     New-Item -Path $ahkTempDir -ItemType Directory -Force | Out-Null
     $args = "/silent", "/to=$tempDir"
-    Start-Process -FilePath $ahkInstaller -ArgumentList $args -Wait
+    Start-Process -FilePath $ahkInstaller -ArgumentList "/SILENT","/TO=`"$ahkTempDir`"" -Wait
 
 
     # Copy the bundled capslock script from this repo (assumes script is next to this PS1).
