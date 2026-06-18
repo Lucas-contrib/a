@@ -17,8 +17,10 @@ try {
     $nvimZip = Join-Path $tempDir "nvim-win64.zip"
     Invoke-WebRequest -Uri $nvimUrl -OutFile $nvimZip
 
-    Write-Host "Extracting Neovim..."
-    Expand-Archive -Path $nvimZip -DestinationPath $tempDir -Force
+    Write-Host "Extracting Neovim using tar..."
+    Push-Location $tempDir
+    & tar -xf $nvimZip
+    Pop-Location
 
     $nvimConfigDir = Join-Path $env:LOCALAPPDATA "nvim"
     New-Item -Path $nvimConfigDir -ItemType Directory -Force | Out-Null
