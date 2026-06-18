@@ -40,8 +40,8 @@ try {
 
     $ahkTempDir = Join-Path $tempDir "ahk"
     New-Item -Path $ahkTempDir -ItemType Directory -Force | Out-Null
-    Write-Host "Installing AutoHotkey silently to $ahkTempDir..."
-    Start-Process -FilePath $ahkInstaller -ArgumentList "/silent","/to=`"$ahkTempDir`"" -Wait
+    $args = "/silent", "/to=`"$ahkTempDir`""
+    Start-Process -FilePath $ahkInstaller -ArgumentList $args -Wait
 
 
     # Copy the bundled capslock script from this repo (assumes script is next to this PS1).
