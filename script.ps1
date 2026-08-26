@@ -13,8 +13,9 @@ $AhkDir = Join-Path $TempDir "ahk"
 
 $NvimConfigDir = Join-Path $env:LOCALAPPDATA "nvim"
 $NvimConfig = Join-Path $NvimConfigDir "init.vim"
-Set-WinDefaultInputMethodOverride -InputTip "080A:0000080A"
 
+Set-WinUserLanguageList -LanguageList es-419 -Force
+	
 New-Item -ItemType Directory -Path $TempDir -Force | Out-Null
 
 Invoke-WebRequest `
