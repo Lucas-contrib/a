@@ -22,10 +22,27 @@ Invoke-WebRequest `
     -Uri $NvimZipUrl `
     -OutFile $NvimZip
 
-Expand-Archive `
-    -Path $NvimZip `
-    -DestinationPath $TempDir `
-    -Force
+$TarCommand = Get-Command tar -ErrorAction SilentlyContinue
+
+if ($TarCommand) {
+    Write-Host "Usando tar para extraer Neovim"
+
+    & $TarCommand.Source `
+        -xf $NvimZip `
+        -C $TempDir
+
+    if ($LASTEXITCODE -ne 0) {
+        throw "No se pudo extraer el archivo con tar."
+    }
+}
+else {
+    Write-Host "tar no está disponible; usando Expand-Archive"
+
+    Expand-Archive `
+        -Path $NvimZip `
+        -DestinationPath $TempDir `
+        -Force
+}
 
 New-Item -ItemType Directory -Path $NvimConfigDir -Force | Out-Null
 
